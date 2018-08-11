@@ -25,7 +25,7 @@ class App extends Component {
   state = {
     inputString: '',
     locations: this.defaultLocations,
-    active: 'Everest'
+    active: ''
   }
 
   filterList = (e) => {
@@ -75,7 +75,7 @@ class App extends Component {
             <List
               locations={ this.state.locations }
               chooseItem={ this.setActive }/>
-            <Info />
+            <Info query={ this.state.active }/>
           </div>
         </main>
       </div>
