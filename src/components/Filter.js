@@ -1,17 +1,17 @@
-import React, { Component } from 'react'
+import React from 'react'
 import './../App.css'
 
-const Map = (props) => {
+const Filter = (props) => {
 
   return (
     <div className="App-filter">
       <input
         type="text"
-        value={ props.value } 
+        value={ props.value }
         placeholder="Input mountain's name"
-        onChange={props.filterList} />
+        onChange={ props.filterList } />
     </div>
   )
 }
 
-export default Map
+export default Filter

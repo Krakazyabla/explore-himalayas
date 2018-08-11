@@ -24,12 +24,8 @@ class App extends Component {
 
   state = {
     inputString: '',
-    infoWindowShown: 'none',
-    locations: this.defaultLocations
-  }
-
-  onMarkerClick = (title) => {
-    this.setState({infoWindowShown: title});
+    locations: this.defaultLocations,
+    active: 'Everest'
   }
 
   filterList = (e) => {
@@ -46,6 +42,11 @@ class App extends Component {
     this.setState({inputString: str, locations: newLocations});
   }
 
+  setActive = (mountain) => {
+    this.setState({active: mountain});
+  }
+
+
 
   componentDidMount() {
   }
@@ -61,8 +62,8 @@ class App extends Component {
         </header>
         <main className="App-main">
           <Map
-            onMarkerClick={this.onMarkerClick}
-            isInfoShown={this.state.infoWindowShown}
+            onMarkerClick={this.setActive}
+            active={this.state.active}
             locations={this.state.locations}
             onInfoClose={() => this.setState({infoWindowShown: 'none'})}
             googleMapURL="https://maps.googleapis.com/maps/api/js?key=AIzaSyDQlk_GImQ5uy8SzK0ku3IoPGZpSlFXTK4&v=3"
@@ -71,7 +72,9 @@ class App extends Component {
             mapElement={<div style={{ height: `100%` }} />}
           />
           <div className="App-results">
-            <List />
+            <List
+              locations={ this.state.locations }
+              chooseItem={ this.setActive }/>
             <Info />
           </div>
         </main>

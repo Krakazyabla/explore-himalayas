@@ -1,12 +1,13 @@
-import React, { Component } from 'react'
+import React from 'react'
 import './../App.css'
 
-const Map = (props) => {
+const ListItem = (props) => {
 
   return (
-    <div className="App-map">
+    <div className="App-list-item">
+      <a href="" onClick={ props.chooseItem }>{ props.name }</a>
     </div>
   )
 }
 
-export default Map
+export default ListItem

@@ -24,10 +24,10 @@ const Map = withScriptjs(withGoogleMap((props) => {
             title={ location.title }
             icon={ location.title === 'Everest' ? everest : null }
             onClick={ () => props.onMarkerClick(location.title) }>
-        {props.isInfoShown === location.title &&
-          <InfoWindow onCloseClick={ props.onInfoClose }>
+        {props.active === location.title &&
+          (<InfoWindow onCloseClick={ props.onInfoClose }>
             <p>{ location.title }</p>
-          </InfoWindow>
+          </InfoWindow>)
         }
         </Marker>
         )}
@@ -36,6 +36,3 @@ const Map = withScriptjs(withGoogleMap((props) => {
 }))
 
 export default Map
-
-// defaultZoom={8}
-// defaultCenter={{ lat: 27.829, lng: 84.692 }}
