@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
-import './App.css'
+import './style/App.css'
+import './style/media.css'
 import Map from './components/Map.js'
 import Filter from './components/Filter.js'
 import List from './components/List.js'
@@ -68,7 +69,7 @@ class App extends Component {
             onInfoClose={() => this.setState({infoWindowShown: 'none'})}
             googleMapURL="https://maps.googleapis.com/maps/api/js?key=AIzaSyDQlk_GImQ5uy8SzK0ku3IoPGZpSlFXTK4&v=3"
             loadingElement={<div style={{ height: `100%` }} />}
-            containerElement={<div className="map-container" style={{ height: `400px` }} />}
+            containerElement={<div className="map-container" style={{ height: `300px` }} />}
             mapElement={<div style={{ height: `100%` }} />}
           />
           <div className="App-results">

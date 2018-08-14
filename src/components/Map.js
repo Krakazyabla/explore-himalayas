@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { withScriptjs, withGoogleMap, GoogleMap, Marker, InfoWindow } from 'react-google-maps'
-import './../App.css'
+import './../style/App.css'
+import './../style/media.css'
 import * as everest from './../icons/goal.svg'
 
 const Map = withScriptjs(withGoogleMap((props) => {

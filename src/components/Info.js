@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
-import './../App.css'
+import './../style/App.css'
+import './../style/media.css'
 
 class Info extends Component {
 
@@ -56,12 +57,12 @@ class Info extends Component {
       output = (<p>Loading in progress...</p>);
     } else {
       const {title, description, link} = this.state.article;
-      output = (<div>
-        <h3>
-          <a className="wiki-link" href={ link }>{ title }</a>
+      output = (<div className="App-info-wrapper">
+        <h3 className="App-info-title">{ title }
+          <a className="wiki-link" href={ link } target="_blank">(see details on Wikipedia)</a>
         </h3>
-        <img src={ this.state.imgURL } alt={ 'Mountain ' + title } />
-        <p> { description } </p>
+        <img className="App-info-image" src={ this.state.imgURL } alt={ 'Mountain ' + title } />
+        <p className="App-info-description"> { description } </p>
         </div>)
     }
     return (

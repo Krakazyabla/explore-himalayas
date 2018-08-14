@@ -1,0 +1,97 @@
+.App {
+  min-height: 100vh;
+  background: #d3e4ff;
+}
+
+.App-header {
+  background: linear-gradient(#132c54 90%, black);
+  padding: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  color: #d3e4ff;
+}
+
+.App-title {
+  font-size: 3rem;
+  font-family: 'Permanent Marker', cursive;
+}
+
+.App-filter input {
+  padding: 10px;
+  border-radius: 5px;
+  border: none;
+  box-shadow: 0 0 3px 2px white;
+}
+
+.App-results {
+  display: flex;
+  background: linear-gradient(black, #d3e4ff 1%);
+}
+
+.App-list {
+  width: 40%;
+  height: 360px;
+  display: flex;
+  flex-flow: column wrap;
+}
+
+.App-list-item {
+  padding: 10px;
+  margin: 12px 2% 0 2%;
+  width: 40%;
+  height: 28px;
+  background: white;
+  border-radius: 5px;
+  font-size: 1.2rem;
+  box-shadow: 2px 2px 0 1px #7c95bf, -2px -2px 0 1px #c3d6f4;
+}
+
+.App-list-item a, .App-list-item a:visited {
+  text-decoration: none;
+  color: black;
+}
+
+.App-info {
+  width: calc(60% - 24px);
+  padding: 12px;
+}
+
+.App-info-wrapper {
+  height: 320px;
+  padding: 10px;
+  overflow: auto;
+  background-color: white;
+  border-radius: 5px;
+  box-shadow: 2px 2px 0 1px #7c95bf, -2px -2px 0 1px #c3d6f4;
+}
+
+.App-info-title {
+  padding-bottom: 10px;
+  text-align: center;
+  font-size: 2rem;
+  font-family: 'Permanent Marker', cursive;
+}
+
+.App-info-image {
+  display: block;
+  max-width: 50%;
+  max-height: 245px;
+  float: left;
+  margin: 10px;
+  border-radius: 3px;
+  border: 1px solid black;
+}
+
+.App-info-description {
+  padding: 20px;
+  margin-left: 50%;
+  text-align: center;
+  line-height: 2rem;
+  font-size: 1.2rem;
+}
+
+.wiki-link {
+  margin: 0 10px;
+  font-size: 1rem;
+}

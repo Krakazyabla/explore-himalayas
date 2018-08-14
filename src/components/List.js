@@ -1,5 +1,6 @@
 import React from 'react'
-import './../App.css'
+import './../style/App.css'
+import './../style/media.css'
 import ListItem from './ListItem.js'
 
 const List = (props) => {
