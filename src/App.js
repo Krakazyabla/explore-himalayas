@@ -29,8 +29,10 @@ class App extends Component {
     active: ''
   }
 
-  filterList = (e) => {
-    const str = e.target.value.trim().toLowerCase();
+  // Function to filter markers and list items when user inputs some value
+  // in input field
+  filterList = (value) => {
+    const str = value.trim().toLowerCase();
     let newLocations;
     if (str === '') {
       newLocations = this.defaultLocations;
@@ -43,23 +45,23 @@ class App extends Component {
     this.setState({inputString: str, locations: newLocations});
   }
 
+  // Function to make location active after it was choosen
   setActive = (mountain) => {
     this.setState({active: mountain});
-  }
-
-
-
-  componentDidMount() {
   }
 
   render() {
     return (
       <div className="App">
         <header className="App-header">
-          <h1 className="App-title">Explore Himalayas</h1>
+          <h1 className="App-title" tabIndex={0}>Explore Himalayas</h1>
           <Filter
             filterList={ this.filterList }
+            chooseItem={ this.setActive }
+            locations={ this.state.locations }
             value={ this.state.inputString } />
+          {/*Skip focusing on map marks*/}
+          <a href="#filter" className="skip-link">Skip map elements and go to the main content</a>
         </header>
         <main className="App-main">
           <Map
@@ -69,7 +71,11 @@ class App extends Component {
             onInfoClose={() => this.setState({infoWindowShown: 'none'})}
             googleMapURL="https://maps.googleapis.com/maps/api/js?key=AIzaSyDQlk_GImQ5uy8SzK0ku3IoPGZpSlFXTK4&v=3"
             loadingElement={<div style={{ height: `100%` }} />}
-            containerElement={<div className="map-container" style={{ height: `300px` }} />}
+            containerElement={
+              <div className="map-container"
+              style={{ height: `300px` }}
+              role="application"
+              aria-label="Map with markers for Himalayan mountains" />}
             mapElement={<div style={{ height: `100%` }} />}
           />
           <div className="App-results">
@@ -79,6 +85,14 @@ class App extends Component {
             <Info query={ this.state.active }/>
           </div>
         </main>
+        <footer>
+          <p className="App-credits">
+            Powered with
+            <a className="App-credits-link" href="https://www.mediawiki.org/wiki/API:Main_page" target="_blank">
+              MediaWiki API
+            </a>
+          </p>
+        </footer>
       </div>
     );
   }

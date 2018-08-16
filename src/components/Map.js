@@ -1,9 +1,10 @@
-import React, { Component } from 'react'
+import React from 'react'
 import { withScriptjs, withGoogleMap, GoogleMap, Marker, InfoWindow } from 'react-google-maps'
 import './../style/App.css'
 import './../style/media.css'
 import * as everest from './../icons/goal.svg'
 
+// Map component built with react-google-maps
 const Map = withScriptjs(withGoogleMap((props) => {
   return(
     <GoogleMap
@@ -11,7 +12,7 @@ const Map = withScriptjs(withGoogleMap((props) => {
         ref={(map) => {
           if (map && props.locations.length > 3) {
             const bounds = new window.google.maps.LatLngBounds();
-            props.locations.map(location => {
+            props.locations.forEach(location => {
               const latLng = new window.google.maps.LatLng(location.coords);
               bounds.extend(latLng);
             });
@@ -24,7 +25,9 @@ const Map = withScriptjs(withGoogleMap((props) => {
             position={ location.coords }
             title={ location.title }
             icon={ location.title === 'Everest' ? everest : null }
-            onClick={ () => props.onMarkerClick(location.title) }>
+            animation={ props.active === location.title ? window.google.maps.Animation.BOUNCE : null}
+            onClick={ () => { props.onMarkerClick(location.title) } }
+            >
         {props.active === location.title &&
           (<InfoWindow onCloseClick={ props.onInfoClose }>
             <p>{ location.title }</p>

@@ -5,8 +5,8 @@ import './../style/media.css'
 const ListItem = (props) => {
 
   return (
-    <div className="App-list-item">
-      <a href="" onClick={ props.chooseItem }>{ props.name }</a>
+    <div className="App-list-item"  onClick={ props.chooseItem }>
+      <a href="">{ props.name }</a>
     </div>
   )
 }

@@ -9,6 +9,7 @@ class Info extends Component {
     imgURL: ''
   }
 
+  // fetch initial article
   componentDidMount() {
     this.fetchData('himalayas');
   }
@@ -21,6 +22,7 @@ class Info extends Component {
     return true;
   }
 
+  // Function for fetching article with wikipedia API
   fetchData = (query) => {
     fetch(`https://en.wikipedia.org/w/api.php?action=opensearch&search=${ query }&limit=1&namespace=0&origin=*`)
       .then(result => {
@@ -32,9 +34,10 @@ class Info extends Component {
             link: data[3][0]
           }
           this.fetchImage(newArticle);
-      })
+      }).catch(error => this.handleError(error))
   }
 
+  // Function for fetching image with wikipedia API
   fetchImage = (article) => {
     fetch(`https://en.wikipedia.org/w/api.php?action=query&format=json&prop=pageimages%7Cpageterms&gsrsearch=${ article.title }&pithumbsize=600&formatversion=2&generator=search&gsrlimit=1`)
       .then(result => {
@@ -48,7 +51,12 @@ class Info extends Component {
           article: article,
           imgURL: src
         });
-      })
+      }).catch(error => this.handleError(error))
+  }
+
+  handleError = (error) => {
+    alert(`Can't load: ${error.message}`);
+    console.log(error);
   }
 
   render() {
@@ -58,7 +66,7 @@ class Info extends Component {
     } else {
       const {title, description, link} = this.state.article;
       output = (<div className="App-info-wrapper">
-        <h3 className="App-info-title">{ title }
+        <h3 className="App-info-title" tabIndex={0}>{ title }
           <a className="wiki-link" href={ link } target="_blank">(see details on Wikipedia)</a>
         </h3>
         <img className="App-info-image" src={ this.state.imgURL } alt={ 'Mountain ' + title } />
