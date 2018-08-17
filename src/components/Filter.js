@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import AutocompleteList from './AutocompleteList'
 import './../style/App.css'
 import './../style/media.css'
 
@@ -55,23 +56,6 @@ class Filter extends Component {
   }
 
   render() {
-    let autocomplete;
-    if (this.props.locations.length > 0 && this.props.locations.length < 5 && !this.state.empty) {
-      autocomplete = (
-        <div className="autocomplete">
-          { this.props.locations.map((location, index) => {
-            return (
-              <div
-                className={ this.state.active === index ? "active autocomplete-item" : "autocomplete-item"}
-                key={ index }
-                onClick={ () => this.onClick(location.title) }>
-                  <a href="" className="autocomplete-item-link">{ location.title }</a>
-              </div>)
-          }) }
-        </div>);
-    } else {
-      autocomplete = null;
-    }
     return (
       <div className="App-filter">
         <input
@@ -82,7 +66,11 @@ class Filter extends Component {
           placeholder="Input mountain's name"
           onKeyDown={ (event) => this.onKeyDown(event) }
           onChange={ (event) => this.props.filterList(event.target.value) } />
-        { autocomplete }
+        <AutocompleteList
+          locations={ this.props.locations }
+          existInput={ !this.state.empty }
+          active = { this.state.active }
+          onClick= { this.onClick }/>
       </div>
     )
   }

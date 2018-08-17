@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import InfoArticle from './InfoArticle'
 import './../style/App.css'
 import './../style/media.css'
 
@@ -6,7 +7,9 @@ class Info extends Component {
 
   state = {
     article: null,
-    imgURL: ''
+    imgURL: '',
+    apiError: false,
+    apiErrorType: ''
   }
 
   // fetch initial article
@@ -16,6 +19,10 @@ class Info extends Component {
 
   shouldComponentUpdate(nextProps) {
     if (nextProps.query !== this.props.query) {
+      this.setState({
+        apiError: false,
+        apiErrorType: ''
+      });
       this.fetchData(nextProps.query);
       return false;
     }
@@ -28,13 +35,14 @@ class Info extends Component {
       .then(result => {
         return result.json();
       }).then(data => {
-          const newArticle = {
-            title: data[1][0],
-            description: data[2][0],
-            link: data[3][0]
-          }
-          this.fetchImage(newArticle);
-      }).catch(error => this.handleError(error))
+        const newArticle = {
+          title: data[1][0],
+          description: data[2][0],
+          link: data[3][0]
+        }
+        this.setState({ article: newArticle });
+        this.fetchImage(newArticle);
+      }).catch(error => this.handleError(error, 'data'))
   }
 
   // Function for fetching image with wikipedia API
@@ -46,32 +54,33 @@ class Info extends Component {
         const src = data.query.pages[0].thumbnail.source;
         if (article.description === '') {
           article.description = data.query.pages[0].terms.description[0];
+          this.setState({ article: article });
         }
         this.setState({
-          article: article,
           imgURL: src
         });
-      }).catch(error => this.handleError(error))
+      }).catch(error => this.handleError(error, 'img'))
   }
 
-  handleError = (error) => {
-    alert(`Can't load: ${error.message}`);
+  handleError = (error, type) => {
     console.log(error);
+    this.setState({
+      apiError: true,
+      apiErrorType: type
+    });
   }
 
   render() {
     let output;
-    if (!this.state.article) {
-      output = (<p>Loading in progress...</p>);
+    if (this.state.apiError && this.state.apiErrorType === 'data') {
+      output = (<h1>{ "Cannot load API's data" }</h1>);
+    } else if (this.state.article){
+      output =
+        <InfoArticle
+          article={ this.state.article }
+          url={ !(this.state.apiErrorType === 'img') && this.state.imgURL } />
     } else {
-      const {title, description, link} = this.state.article;
-      output = (<div className="App-info-wrapper">
-        <h3 className="App-info-title" tabIndex={0}>{ title }
-          <a className="wiki-link" href={ link } target="_blank">(see details on Wikipedia)</a>
-        </h3>
-        <img className="App-info-image" src={ this.state.imgURL } alt={ 'Mountain ' + title } />
-        <p className="App-info-description"> { description } </p>
-        </div>)
+      output = (<h1>{ "Loading in progress" }</h1>);
     }
     return (
         <div className="App-info">
