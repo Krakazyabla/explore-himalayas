@@ -14,6 +14,13 @@ The app will be available by default at the address[http://localhost:3000/](http
 **IMPORTANT!**
 Using Wiki API needs CORS allowed, one way to enable CORS is Chrome extention (https://chrome.google.com/webstore/detail/allow-control-allow-origi/nlfbmbojpeacfghkpbjhddihlkkiljbi). It should be installed and turned on before using application.
 
+## Production mode
+
+The service worker included works in the production build, to run the application in the production build follow the steps below:
+1. Run command 'npm run build' in node.js to create an optimized version of the project
+2. Run 'serve -s build' to starting server
+3. Navigate to http://localhost:3000/
+
 ## App description
 
 The main page of Explore Himalayas app divides on three parts: map of Himalayas with markers, that points to highest mountains, area with text input to filter markers, area with list of markered mountains, info window with details about certain mountain and link to appropriate Wikipedia page. When app starts, in info window you can see info about Himalayas - highest mountain range in the world.

@@ -60,8 +60,8 @@ class Filter extends Component {
       <div className="App-filter">
         <input
           type="text"
-          role="search"
-          aria-labelledby="filter"
+          role="combobox"
+          aria-label="Filtering mountains"
           value={ this.state.empty ? '' : this.props.value }
           placeholder="Input mountain's name"
           onKeyDown={ (event) => this.onKeyDown(event) }

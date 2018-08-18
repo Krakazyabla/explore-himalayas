@@ -15,6 +15,10 @@ class App extends Component {
     active: ''
   }
 
+  gm_authFailure() {
+    window.alert("Google Maps error: authentification failed!");
+  }
+
   // Function to filter markers and list items when user inputs some value
   // in input field
   filterList = (value) => {
@@ -36,8 +40,11 @@ class App extends Component {
     this.setState({active: mountain});
   }
 
-  render() {
+  componentWillMount(){
+    window.gm_authFailure = this.gm_authFailure;
+  }
 
+  render() {
     // display google map or error message depends on script loading
     let mapArea;
     if (window.google) {
